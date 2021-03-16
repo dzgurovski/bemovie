@@ -3,8 +3,8 @@ import Movie from '../../components/Movie';
 
 const MovieList = (props) =>{
     return <div className="movies">
-        {props.data.map((movie, key)=>{
-            return <Movie key={key} data={movie} />
+        {props.data.movieData.map((movie, key)=>{
+            return <Movie remove={props.remove} key={key} data={{movieData:movie, type:props.data.type}} />
         })}
     </div>
 }

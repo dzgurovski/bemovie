@@ -10,7 +10,10 @@ const favoriteMovieSchema = mongoose.Schema({
     },
     Poster: {
         type: String
-    } 
+    },
+    imdbID: {
+        type: String
+    }
 }, { timestamps: true })
 
 

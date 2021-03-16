@@ -12,6 +12,13 @@ router.get("/all", (req, res) => {
         })
 });
 
+router.get("/", (req, res) => {
+    Movies.findOne({imdbID: req.query.imdbID})
+        .exec((err, data) => {
+            if (err) return res.status(400).send(err);
+            return res.status(200).json({ success: true, data })
+        })
+});
 
 router.post("/", (req, res) => {
     const newMovie = new Movies(req.body);
@@ -26,7 +33,7 @@ router.post("/", (req, res) => {
 
 
 router.delete("/", (req, res) => {
-    Movies.findOneAndDelete({ movieId: req.body.id })
+    Movies.findOneAndDelete({ movieId: req.body.imdbID })
         .exec((err, doc) => {
             if (err) return res.status(400).json({ success: false, err });
             res.status(200).json({ success: true, doc })

@@ -7,18 +7,20 @@ const Addmovie = () => {
   const [searchValue, setSearchValue] = useState('');
   const [searchItems, setSearchItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  
   const onTypeSearch = (e) => {
     setSearchValue(e.target.value);
   };
+
   const onSearch = () => {
     axios.get(`https://www.omdbapi.com/?s=${searchValue}&apikey=bb8822e5&type=movie`)
       .then(response => {
-        if (response) {
-          console.log(response.data.Search);
-          setSearchItems(response.data.Search);
-          setLoading(true);
+        if (response.data.Response === "True") {
+           setSearchItems(response.data.Search);
+           setLoading(true);
         } else {
-          alert('Failed to get movie')
+          setLoading(false);
+          alert('Failed to get movie');
         }
       });
   };
@@ -33,7 +35,7 @@ const Addmovie = () => {
         <TextField onKeyUp={onTypeSearch} id="standard-search" label="Заглавие" type="search" />
         <Button variant="contained" onClick={onSearch} color="primary">Tърси</Button>
       </Box>
-      {loading && <MovieList data={searchItems}/>}
+      {loading && <MovieList data={{movieData:searchItems, type:"search"}}/>}
     </Container>
   </div>
 }

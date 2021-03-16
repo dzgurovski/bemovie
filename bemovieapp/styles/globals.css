@@ -57,5 +57,9 @@ table {
 	margin-top:10px;
 }
 .movies div ~ div{
+	margin-top:10px;
 	margin-left:10px;
+}
+.movies div ~ div:nth-child(4n + 1){
+	margin-left:0;
 }
